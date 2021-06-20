@@ -12,9 +12,6 @@ import org.jsoup.select.Elements;
 //@SpringBootTest
 public class DemoApplicationTests {
 
-	//@Autowired
-	private AddressListDao addressListDao;
-
 
 	private  int startPage = 29113;
 
