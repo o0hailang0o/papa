@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.MysqlDao" >
+
+    <select id="listTableName" parameterType="string" resultType="string">
+        SELECT
+            table_name
+        FROM information_schema.tables
+            WHERE
+            table_schema=#{baseName}
+            AND table_type='base table';
+    </select>
+
+
+    <select id="getFieldList" resultType="Column">
+        SELECT
+            column_name as columnName,
+            data_type as dataType,
+            column_comment as columnComment
+        FROM information_schema.columns
+            WHERE table_schema = #{baseName}
+        AND table_name = #{tableName} ;
+    </select>
+
+    <select id="getDatas" resultType="map">
+         select
+           *
+          from
+        ${tableName}
+          where
+        <![CDATA[ id >= #{minId} and id<#{maxId} ]]>
+    </select>
+
+    <select id="minId" resultType="long">
+        select min(Id*1) as id from ${tableName}
+    </select>
+
+    <select id="maxId" resultType="long">
+        select max(Id*1) as id from ${tableName}
+    </select>
+</mapper>

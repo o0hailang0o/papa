@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.AddressWebDao" >
+
+    <insert id="addAddressWeb" parameterType="addressWeb" >
+      INSERT INTO `mall_user_map`.`address_web` (
+        <if test="addressId!=null">
+            `address_id`,
+        </if>
+        <if test="certNo!=null and certNo!=''">
+            `cert_no`,
+        </if>
+         <if test="addressName!=null and addressName!=''">
+             `address_name`,
+         </if>
+         <if test="address!=null and address!=''">
+             `address`,
+         </if>
+         <if test="warehouseAddress!=null and  warehouseAddress!=''">
+             `warehouse_address`,
+         </if>
+        <if test="legalPerson!=null and legalPerson!=''">
+            `legal_person`,
+        </if>
+         <if test="companyPrincipal!=null and companyPrincipal!=''">
+             `company_principal`,
+         </if>
+         <if test="qualityPrincipal!=null and qualityPrincipal!=''">
+             `quality_principal`,
+         </if>
+        <if test="operationMode!=null and operationMode!=''">
+            `operation_mode`,
+        </if>
+         <if test="businessScope!=null and businessScope!=''">
+          `business_scope`,
+         </if>
+        <if test="issueCertTime!=null">
+          `issue_cert_time`,
+        </if>
+        <if test="certPeriodTime!=null">
+          `cert_period_time`,
+        </if>
+        <if test="certIssueOrg!=null and certIssueOrg!=''">
+          `cert_issue_org`,
+        </if>
+          `cert_status`
+        )
+        VALUES
+          (
+        <if test="addressId!=null">
+            #{addressId},
+        </if>
+        <if test="certNo!=null and certNo!=''">
+            #{certNo},
+        </if>
+        <if test="addressName!=null and addressName!=''">
+            #{addressName},
+        </if>
+        <if test="address!=null and address!=''">
+            #{address},
+        </if>
+        <if test="warehouseAddress!=null and  warehouseAddress!=''">
+            #{warehouseAddress},
+        </if>
+        <if test="legalPerson!=null and legalPerson!=''">
+            #{legalPerson},
+        </if>
+        <if test="companyPrincipal!=null and companyPrincipal!=''">
+            #{companyPrincipal},
+        </if>
+        <if test="qualityPrincipal!=null and qualityPrincipal!=''">
+            #{qualityPrincipal},
+        </if>
+        <if test="operationMode!=null and operationMode!=''">
+            #{operationMode},
+        </if>
+        <if test="businessScope!=null and businessScope!=''">
+            #{businessScope},
+        </if>
+        <if test="issueCertTime!=null">
+            #{issueCertTime},
+        </if>
+        <if test="certPeriodTime!=null">
+            #{certPeriodTime},
+        </if>
+        <if test="certIssueOrg!=null and certIssueOrg!=''">
+            #{certIssueOrg},
+        </if>
+            '1'
+          ) ;
+    </insert>
+
+</mapper>

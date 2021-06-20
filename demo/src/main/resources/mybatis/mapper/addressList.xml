@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.AddressListDao" >
+
+    <insert id="addAddressList" parameterType="addressList" >
+       INSERT INTO z_address_list (`id`, `name`, `href`, `status`)
+          VALUES
+  ( #{id}, #{name}, #{href}, #{status}) ;
+    </insert>
+
+    <select id="getAddressList" resultType="addressList">
+       SELECT
+          `id`,
+          `name`,
+          `href`,
+          `status`
+        FROM
+          z_address_list
+         where status = 0
+           order by id desc
+        LIMIT 0, 20 ;
+    </select>
+
+    <update id="updateStatus" parameterType="Long">
+        update z_address_list set status = 1 where id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.LbsOrderItemDao" >
+
+    <select id="listLbsOrderItem" parameterType="Integer" resultType="LbsOrderItem">
+       SELECT
+          `id`,
+          `name`,
+          `count`,
+          `price`,
+          `order_id` as orderId
+        FROM
+         `lbs_order_item`  limit ${value},1000
+    </select>
+</mapper>

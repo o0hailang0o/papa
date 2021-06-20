@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ScaTransactionMapper">
+
+    <select id="countScaTransaction" resultType="integer">
+        SELECT COUNT(1) FROM `sca_transaction` WHERE province_code IN ('500000','430000','370000','140000')
+    </select>
+
+    <select id="findAll" resultType="ScaTransaction">
+        SELECT
+          `id`,
+          `factory_id` as factoryId,
+          `sn`,
+          `drug_id` as drugId,
+          `drug_name` as drugName,
+          `drug_category_id` as drugCategoryId,
+          `drug_category` as drugCategory,
+          `spec`,
+          `spec_id` as specId,
+          `count`,
+          `price`,
+          `province_name` as provinceName,
+          `province_code` as provinceCode,
+          `city_name` as cityName,
+          `city_code` as cityCode,
+          `district_name` as districtName,
+          `district_code` as districtCode,
+          `client_name` as clientName,
+          `client_address` as clientAddress,
+          `client_type` as clientType,
+          `client_sub_type` as clientSubType,
+          client_third_type as clientThirdType,
+          `trading_company` as tradingCompany,
+          `trading_company_id` as tradingCompanyId,
+          `manufacturer`,
+          `match_client_id` as matchClientId,
+          `transaction_time` as transactionTime,
+          `create_at` as createAt,
+          `update_at` as updateAt
+        FROM
+         `sca_transaction`
+         WHERE
+          match_client_id !=0
+          <![CDATA[
+            AND id>#{pageNum} and id<=#{pageSize}
+          ]]>
+    </select>
+</mapper>

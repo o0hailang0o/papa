@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.LbsAddressDao" >
+
+    <select id="getLbsAddressById" parameterType="Long" resultType="LbsAddress">
+        SELECT
+          `id`,
+          `name`,
+          `address`,
+          `province`,
+          `city`,
+          `district`,
+          `longitude`,
+          `latitude`,
+          `type`,
+          `created_time` as createdTime,
+          `update_time` as updateTime,
+          `source_qcc_id` as sourceQccId
+        FROM
+          `lbs_address`
+        WHERE
+            id=#{id}
+    </select>
+
+
+    <select id="getLbsAddress" resultType="LbsAddress">
+       SELECT
+          `id`,
+          `name`,
+          `address`,
+          `province`,
+          `city`,
+          `district`,
+          `longitude`,
+          `latitude`,
+          `type`,
+          `created_time` as createdTime,
+          `update_time` as updateTime,
+          `source_qcc_id` as sourceQccId
+        FROM
+          `lbs_address`
+        limit  ${value},10000
+    </select>
+
+</mapper>

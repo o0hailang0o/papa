@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.LbsOrderDao" >
+
+    <select id="getLbsOrderById" parameterType="Long" resultType="lbsOrder">
+        SELECT
+          `id`,
+          `order_sn` as orderSn,
+          `goods_count` as goodsCount,
+          `total`,
+          `address`,
+          `lbs_address_id` as lbsAddressId,
+          `created_time` as createdTime
+        FROM
+          lbs_order
+        WHERE
+          id = #{id}
+    </select>
+</mapper>

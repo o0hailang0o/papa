@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.ScaClientMapper">
+
+    <select id="countScaClient" resultType="int">
+        SELECT COUNT(1) FROM `sca_client` WHERE province_code IN ('500000','430000','370000','140000')
+        AND `type` IN('100','200') AND is_delete = '0'
+    </select>
+
+    <select id="getScaClientList" resultType="scaClient">
+        SELECT
+          `id`,
+          `uuid`,
+          `name`,
+          `address`,
+          `user`,
+          `email`,
+          `phone`,
+          `phone_more` as phoneMore,
+          `bussiness_scope` as bussinessScope,
+          `province_code` as provinceCode,
+          `province_name` as provinceName,
+          `city_code` as cityCode,
+          `city_name` as cityName,
+          `district_code` as districtCode,
+          `district_name` as districtName,
+          `township_code` as townshipCode,
+          `township_name` as townshipName,
+          `village_code` as villageCode,
+          `village_name` as villageName,
+          `longitude`,
+          `latitude`,
+          `status`,
+          `type`,
+          `sub_type` as subType,
+           third_type as thirdType,
+          `accurate_level` as accurateLevel,
+          `source_uuid` as sourceUuid,
+           source_id as sourceId,
+          `create_at` as createAt,
+          `update_at` as updateAt
+        FROM
+           `sca_client`
+        where
+           is_delete = '0'
+        <![CDATA[
+          AND id>#{pageNum} and id<=#{pageSize}
+        ]]>
+    </select>
+</mapper>
+
