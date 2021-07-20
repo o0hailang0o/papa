@@ -13,11 +13,8 @@ import java.util.ArrayList;
 public class OuzhouBei {
 
     public static Session createSession(){
-        ArrayList<String> command = new ArrayList<String>();
-        //不显示google 浏览器
-      //  command.add("--headless");
         Launcher launcher = new Launcher();
-        SessionFactory factory = launcher.launch("C://Users//Administrator//AppData//Local//Google//Chrome//Application//chrome.exe",command);
+        SessionFactory factory = launcher.launch();
         Session session = factory.create();
         return session;
     }
@@ -31,13 +28,13 @@ public class OuzhouBei {
         Document doc = Jsoup.parse(content);
         Elements rows= doc.select(".leftPan .portlet");
         for(Element row : rows){
-            Elements trs =  row.select("table tr");
-            for(Element td : trs){
-
-            }
+            Elements mCodeCls =  row.select("table .mCodeCls");
+            Elements dateCls = row.select("table .dateCls");
+            Elements vsCls = row.select("table .vsCls");
+          //  Elements
+            System.out.println(mCodeCls.html());
         }
 
-        System.out.println(html);
     }
 
     public static void main(String[] args)throws Exception{

@@ -1,3 +1,4 @@
+/*
 package com.demo;
 
 import io.webfolder.cdp.Launcher;
@@ -96,3 +97,4 @@ public class DemoApplicationTests {
 
 	}
 }
+*/

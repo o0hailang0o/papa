@@ -15,7 +15,7 @@ import java.util.List;
 //@SpringBootTest
 public class ConsumerAddressListTests {
 
-   // @Autowired
+   /*// @Autowired
     private AddressListService addressListService;
 
     //@Autowired
@@ -197,5 +197,5 @@ public class ConsumerAddressListTests {
         System.out.println(companyPrincipal);
         session.stop();
         session.close();
-    }
+    }*/
 }
