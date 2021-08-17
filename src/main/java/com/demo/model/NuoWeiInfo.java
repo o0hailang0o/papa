@@ -14,6 +14,7 @@ public class NuoWeiInfo {
 
      @TableId(type=IdType.AUTO)
      private Integer id ;
+     private String season;
      private Date matchTime;
      private String rounds;
 	 private String SortHost;

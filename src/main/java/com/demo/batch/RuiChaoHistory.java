@@ -1,7 +1,9 @@
 package com.demo.batch;
 
 import com.demo.dao.NuoWeiInfoMapper;
+import com.demo.dao.RuiDianInfoMapper;
 import com.demo.model.NuoWeiInfo;
+import com.demo.model.RuiDianInfo;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
@@ -21,35 +23,35 @@ import java.util.Date;
 import java.util.HashMap;
 
 @Component
-public class NuoChaoHistory implements ApplicationRunner {
+public class RuiChaoHistory implements ApplicationRunner {
 
-    String season = "挪超2020赛季";
+    String season = "瑞典2020赛季";
 
     HashMap<Integer, String> map =
             new HashMap<>() {
                 {
-                  //  put(2021, "mid=133&s_id=7796");
-                    put(2020, "mid=133&s_id=6865");
-                    put(2019, "mid=133&s_id=5585");
-                    put(2018, "mid=133&s_id=4347");
-                    put(2017, "mid=133&s_id=3212");
-                    put(2016, "mid=133&s_id=2043");
-                    put(2015, "mid=133&s_id=173");
-                    put(2014, "mid=133&s_id=173");
-                    put(2013, "mid=133&s_id=99");
-                    put(2012, "mid=133&s_id=69");
-                    put(2011, "mid=133&s_id=69");
-                    put(2010, "mid=133&s_id=27");
-                    put(2009, "mid=133&s_id=4");
+                    //put(2021, "sp_lid=58&sp_mid=1008147");
+                    put(2020, "mid=132&s_id=6911");
+                    put(2019, "mid=132&s_id=5559");
+                    put(2018, "mid=132&s_id=4294");
+                    put(2017, "mid=132&s_id=3197");
+                    put(2016, "mid=132&s_id=2042");
+                    put(2015, "mid=132&s_id=172");
+                    put(2014, "mid=132&s_id=124");
+                    put(2013, "mid=132&s_id=100");
+                    put(2012, "mid=132&s_id=70");
+                    put(2011, "mid=132&s_id=48");
+                    put(2010, "mid=132&s_id=26");
+                    put(2009, "mid=132&s_id=5");
                 }
             };
 
     @Autowired
-    private NuoWeiInfoMapper nuoWeiInfoMapper;
+    private RuiDianInfoMapper ruiDianInfoMapper;
 
 
     public  void getData(Integer year)throws Exception {
-        season =  "挪超"+year+"赛季";
+        season =  "瑞典超级联赛"+year+"赛季";
         Launcher launcher = new Launcher();
         SessionFactory factory = launcher.launch();
         Session session = factory.create();
@@ -89,17 +91,17 @@ public class NuoChaoHistory implements ApplicationRunner {
             if(index++==0){
                 continue;
             }
-            NuoWeiInfo nuoWeiInfo = new NuoWeiInfo();
-            nuoWeiInfo.setSeason(season);
+            RuiDianInfo ruiDianInfo = new RuiDianInfo();
+            ruiDianInfo.setSeason(season);
             String date = tr.select("td").eq(0).html();
             Date matchTime = getMatchTime(date);
-            nuoWeiInfo.setMatchTime(matchTime);
+            ruiDianInfo.setMatchTime(matchTime);
 
             String rounds = tr.select("td").eq(1).html();
-            nuoWeiInfo.setRounds(rounds);
+            ruiDianInfo.setRounds(rounds);
 
             String host = tr.select("td").eq(2).select("a").html();
-            nuoWeiInfo.setHost(host);
+            ruiDianInfo.setHost(host);
 
             String half = tr.select("td").eq(3).select("a").html();
             if(StringUtils.isEmpty(half)){
@@ -110,8 +112,8 @@ public class NuoChaoHistory implements ApplicationRunner {
             }
             String halfHostScoreStr = half.split(":")[0];
             String halfGuestScoreStr = half.split(":")[1];
-            nuoWeiInfo.setHalfHostScore(Integer.parseInt(halfHostScoreStr));
-            nuoWeiInfo.setHalfGuestScore(Integer.parseInt(halfGuestScoreStr));
+            ruiDianInfo.setHalfHostScore(Integer.parseInt(halfHostScoreStr));
+            ruiDianInfo.setHalfGuestScore(Integer.parseInt(halfGuestScoreStr));
 
             String all = tr.select("td").eq(4).select("a").html();
             if(StringUtils.isEmpty(all)){
@@ -123,20 +125,20 @@ public class NuoChaoHistory implements ApplicationRunner {
 
             String allHostScoreStr = all.split(":")[0];
             String allGuestScoreStr = all.split(":")[1];
-            nuoWeiInfo.setHostScore(Integer.parseInt(allHostScoreStr));
-            nuoWeiInfo.setGuestScore(Integer.parseInt(allGuestScoreStr));
+            ruiDianInfo.setHostScore(Integer.parseInt(allHostScoreStr));
+            ruiDianInfo.setGuestScore(Integer.parseInt(allGuestScoreStr));
 
             String guest = tr.select("td").eq(5).select("a").html();
-            nuoWeiInfo.setGuest(guest);
+            ruiDianInfo.setGuest(guest);
 
             String winPrice = tr.select("td").eq(6).select("span").eq(0).html();
-            nuoWeiInfo.setWinPrice(handlerBigDecimal(winPrice));
+            ruiDianInfo.setWinPrice(handlerBigDecimal(winPrice));
             String evenPrice = tr.select("td").eq(6).select("span").eq(1).html();
-            nuoWeiInfo.setEvenPrice(handlerBigDecimal(evenPrice));
+            ruiDianInfo.setEvenPrice(handlerBigDecimal(evenPrice));
             String lostPrice = tr.select("td").eq(6).select("span").eq(2).html();
-            nuoWeiInfo.setLostPrice(handlerBigDecimal(lostPrice));
-            System.out.println(nuoWeiInfo);
-            nuoWeiInfoMapper.insert(nuoWeiInfo);
+            ruiDianInfo.setLostPrice(handlerBigDecimal(lostPrice));
+            System.out.println(ruiDianInfo);
+            ruiDianInfoMapper.insert(ruiDianInfo);
         }
     }
 
@@ -163,8 +165,9 @@ public class NuoChaoHistory implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-      /*  for(int i=2018;i>=2009;i--){
+        for(int i=2020;i>=2009;i--){
             getData(i);
-        }*/
+        }
     }
+
 }
